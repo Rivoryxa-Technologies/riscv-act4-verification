@@ -19,3 +19,16 @@ jobs:
         with:
           name: cv32e40p-act4-evidence
           path: evidence/
+  historical-timer:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y verilator build-essential
+      - run: python3 -m unittest discover -s tests -v
+      - run: python3 historical/run.py
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: historical-timer-evidence
+          path: evidence/
