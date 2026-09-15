@@ -10,7 +10,9 @@ REVISIONS={'before':'1726d14796601884d54d9b0f699128800e2dcf55',
            'after':'001127416802a6f346aff3dde08e91d2b9f86958'}
 FILES=('tb/core/mm_ram.sv','tb/core/dp_ram.sv','tb/core/tb_riscv/riscv_rvalid_stall.sv','tb/core/tb_riscv/riscv_gnt_stall.sv')
 CASES={'smoke':None,'carry_without_write':None,'low_write_at_carry':'LOW_WRITE_CARRY_FAILED',
-       'high_write_holds_low':'HIGH_WRITE_HOLD_FAILED','spurious_timer_irq':'SPURIOUS_TIMER_IRQ_FAILED'}
+       'high_write_holds_low':'HIGH_WRITE_HOLD_FAILED','spurious_timer_irq':'SPURIOUS_TIMER_IRQ_FAILED',
+       'bus_low_write_at_carry':'BUS_LOW_CARRY_FAILED','bus_high_write_holds_low':'BUS_HIGH_HOLD_FAILED'}
+DIFF_HASH='f305bc119c219a627dfc9678aafdc9d3bace952bcd78f9d96616d9db4368a5d0'
 def sha(data): return hashlib.sha256(data).hexdigest()
 def accepted(variant,case,rc,text,timed):
     markers=re.findall(r'\b[A-Z_]+_FAILED\b',text)
@@ -28,7 +30,15 @@ def main():
     out=a.evidence.resolve()/('historical-'+uuid.uuid4().hex[:12]);out.mkdir(parents=True)
     if not source.exists():
         subprocess.run(['git','clone','--filter=blob:none',URL,str(source)],check=True,timeout=180)
-    report={'schema_version':1,'upstream':URL,'revisions':REVISIONS,'cases':[], 'builds':[],
+    before,after=REVISIONS['before'],REVISIONS['after']
+    subprocess.run(['git','merge-base','--is-ancestor',before,after],cwd=source,check=True,timeout=15)
+    changed=subprocess.check_output(['git','diff','--name-only',before,after],cwd=source,text=True,timeout=15).splitlines()
+    diff=subprocess.check_output(['git','diff','--binary',before,after,'--','tb/core/mm_ram.sv'],cwd=source,timeout=15)
+    if changed!=['tb/core/mm_ram.sv'] or sha(diff)!=DIFF_HASH:
+        raise RuntimeError('Historical source diff does not match the reviewed upstream fix')
+    (out/'upstream-fix.diff').write_bytes(diff)
+    metadata={v:subprocess.check_output(['git','show','-s','--format=%H%n%P%n%an%n%aI%n%s',r],cwd=source,text=True,timeout=15).strip() for v,r in REVISIONS.items()}
+    report={'schema_version':2,'ancestry_verified':True,'changed_files':changed,'diff_sha256':sha(diff),'commit_metadata':metadata,'upstream':URL,'revisions':REVISIONS,'cases':[], 'builds':[],
             'platform':platform.platform(),'python':platform.python_version(),
             'bench_sha256':sha((ROOT/'historical/mm_ram_timer_tb.sv').read_bytes()),
             'runner_sha256':sha(Path(__file__).read_bytes()),
@@ -56,7 +66,8 @@ def main():
                                     'expected_failure':CASES[case] if variant=='before' else None})
             print(variant,case,'EXPECTED' if ok else 'UNEXPECTED',flush=True)
     pairs=[(c['variant'],c['case']) for c in report['cases']]
-    report['ok']=len(pairs)==10 and set(pairs)=={(v,c) for v in REVISIONS for c in CASES} and all(c['accepted'] for c in report['cases'])
+    report['ok']=len(pairs)==len(REVISIONS)*len(CASES) and set(pairs)=={(v,c) for v in REVISIONS for c in CASES} and all(c['accepted'] for c in report['cases'])
+    report['log_sha256']={str(p.relative_to(out)):sha(p.read_bytes()) for p in out.rglob('*.log')}
     (out/'summary.json').write_text(json.dumps(report,indent=2)+'\n'); print(out)
     return 0 if report['ok'] else 1
 if __name__=='__main__':sys.exit(main())

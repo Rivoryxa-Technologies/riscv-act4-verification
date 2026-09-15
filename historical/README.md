@@ -15,7 +15,7 @@ python3 -m unittest discover -s tests -v
 python3 historical/run.py
 ```
 
-The runner fetches the upstream repository if `workspace/dv` is absent. It extracts each of four unchanged RTL sources directly from the exact historical commits using `git show`. It does not rewrite the RTL or change an existing checkout. Each variant compiles the real `mm_ram`, dual-port RAM, and grant/response stall modules with the same testbench and simulator options.
+The runner fetches the upstream repository if `workspace/dv` is absent. It extracts each of four unchanged RTL sources directly from the exact historical commits using `git show`. It verifies commit ancestry, the exact changed-file list, and a pinned hash of the upstream diff. It records upstream commit metadata and does not rewrite the RTL or change an existing checkout. Each variant compiles the real `mm_ram`, dual-port RAM, and grant/response stall modules with the same testbench and simulator options.
 
 | Scenario | Before, `1726d147` | After, `00112741` |
 | --- | --- | --- |
@@ -24,8 +24,10 @@ The runner fetches the upstream repository if `workspace/dv` is absent. It extra
 | Low write on the carry boundary | `LOW_WRITE_CARRY_FAILED` | Pass |
 | High write preserves low half | `HIGH_WRITE_HOLD_FAILED` | Pass |
 | Carry-boundary write must not assert MTIP | `SPURIOUS_TIMER_IRQ_FAILED` | Pass |
+| Public bus readback after low write at carry | `BUS_LOW_CARRY_FAILED` | Pass |
+| Public bus readback after high write | `BUS_HIGH_HOLD_FAILED` | Pass |
 
-All setup uses public bus writes. No timer state is forced or backdoor-initialized. The monitor observes internal timer state for localization and checks the public interrupt output for the resulting functional symptom. Each required diagnostic is checked exactly; timeout, compilation failure, or unrelated failure cannot satisfy an expected failing case. Source hashes, commands, tool version, timings, compile logs, simulator logs, and the complete ten-outcome matrix are saved to a new evidence directory.
+All setup uses public bus writes. No timer state is forced or backdoor-initialized. The monitor observes internal timer state for localization and checks the public interrupt output for the resulting functional symptom. Two additional scenarios read both timer halves through the public response bus against an independent model driven only by bus writes and clocks. Each required diagnostic is checked exactly; timeout, compilation failure, or unrelated failure cannot satisfy an expected failing case. Source and log hashes, commands, tool version, timings, compile logs, simulator logs, and the complete fourteen-outcome matrix are saved to a new evidence directory.
 
 ## Why this is useful, and its limits
 
