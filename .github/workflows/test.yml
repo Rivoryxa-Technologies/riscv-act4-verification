@@ -7,3 +7,21 @@ jobs:
       - uses: actions/checkout@v4
       - run: python3 -m unittest discover -s tests -v
       - run: python3 -m py_compile setup.py run.py
+  full-proof:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y verilator build-essential gcc-riscv64-unknown-elf
+      - run: python3 setup.py workspace
+      - name: Generate ACT4 ELFs with pinned tool image
+        run: |
+          docker run --rm --user "$(id -u):$(id -g)" -e HOME=/home/shared -v "$PWD:/repo" ghcr.io/riscv/act4-build@sha256:117d9d4ed85cf6f564d21d1ee030546416d4737c024f6a1608c53a1bd9c71ca0 sh -lc \
+            'cd /repo/workspace/act4 && mise trust .mise.toml && mise install && mise exec -- make clean && mise exec -- make CONFIG_FILES=config/cores/cve4/cv32e40p-v2-rv32imc/test_config.yaml'
+      - run: python3 setup.py workspace --build
+      - run: python3 run.py workspace
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv32e40p-act4-evidence
+          path: evidence/

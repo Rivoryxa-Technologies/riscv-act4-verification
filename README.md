@@ -15,19 +15,28 @@ general RISC-V compliance or certification.
 
 Prerequisites are Git, Python 3.10+, Make, `uv`, Ruby/Bundler, a compatible
 RISC-V GCC toolchain, Sail RISC-V 0.13.1, Verilator, and a C++ compiler. The
-upstream ACT4 README documents these dependencies. `setup.py` invokes no package
+upstream ACT4 README documents these dependencies. The pinned Linux ARM64 ACT4
+build image contains GCC 16.1.0 and Sail 0.13.1. `setup.py` invokes no package
 installer and does not use unpinned source branches.
 
 ```sh
-python3 setup.py ./workspace --generate --build
-python3 run.py ./workspace
+REPO=/absolute/path/to/riscv-act4-verification
+python3 "$REPO/setup.py" "$REPO/workspace"
+docker run --rm --user "$(id -u):$(id -g)" -e HOME=/home/shared -v "$REPO:/repo" \
+  ghcr.io/riscv/act4-build@sha256:117d9d4ed85cf6f564d21d1ee030546416d4737c024f6a1608c53a1bd9c71ca0 \
+  sh -lc 'cd /repo/workspace/act4 && mise trust .mise.toml && mise install && mise exec -- make clean && mise exec -- make CONFIG_FILES=config/cores/cve4/cv32e40p-v2-rv32imc/test_config.yaml'
+python3 "$REPO/setup.py" "$REPO/workspace" --build
+python3 "$REPO/run.py" "$REPO/workspace"
 ```
 
 Both commands work from any current directory. Generation produces expected
 results with the pinned Sail/UDB configuration; simulation executes those ELFs
 on the pinned CV32E40P RTL. The runner exits 2 for setup or pin/count errors, 1
 for any failed, missing, ambiguous, or timed-out result, and 0 only for 94/94.
-Each run retains unique logs, ELF hashes, source commits, integration-source and
+`setup.py --build` records source pins, the complete allowed integration diff,
+the Verilator version, and simulator hash in `build-provenance.json`; the runner
+rejects a missing or mismatched record. Each run regenerates the Verilog HEX actually consumed by the testbench from
+its paired ELF. It retains unique logs, ELF and HEX hashes, source commits, integration-source and
 simulator hashes, available tool versions, wall times, and `summary.json` under
 `evidence/`.
 
@@ -39,7 +48,7 @@ configuration parameter; it fails closed if upstream context differs.
 ## Licensing and provenance
 
 This wrapper code is MIT licensed. It does not vendor upstream source or ACT
-artifacts. Exact repositories, commits, and SPDX license families are recorded
+artifacts. Exact repositories, commits, and upstream license-file paths are recorded
 in `pins.json`; the cloned projects retain their own copyright and license
 files. Generated ELFs derive from the pinned ACT4 tests and Sail expectations.
 
@@ -47,6 +56,5 @@ files. Generated ELFs derive from the pinned ACT4 tests and Sail expectations.
 
 The current matrix is CV32E40P v2 RV32IMC only. It does not cover floating point,
 other privilege configurations, other cores, formal verification, performance,
-security, CDC, or physical implementation. Tool availability and clean build
-time make this unsuitable as a lightweight hosted CI job; the checked workflow
-validates the wrapper itself and documents how to run the full local proof.
+security, CDC, or physical implementation. The GitHub Actions full-proof job
+runs clean generation, RTL build, all 94 simulations, and uploads evidence.

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
 """Clone pinned upstreams and wire an isolated CV32E40P ACT4 workspace."""
-import argparse, json, subprocess
+import argparse, hashlib, json, os, platform, shutil, subprocess, time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -10,6 +10,7 @@ PINS = json.loads((ROOT / "pins.json").read_text())
 def run(*cmd, cwd=None):
     print("+", " ".join(map(str, cmd)))
     subprocess.run(list(map(str, cmd)), cwd=cwd, check=True)
+def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def main():
     p = argparse.ArgumentParser()
@@ -21,14 +22,20 @@ def main():
     names = {"riscv-arch-test":"act4", "cv32e40p-dv-review":"dv", "cv32e40p":"core", "core-v-verif":"core-v-verif"}
     for key, dest in names.items():
         path = ws / dest; pin = PINS[key]
-        if not path.exists(): run("git", "clone", "--filter=blob:none", pin["url"], path)
-        run("git", "fetch", "origin", pin["commit"], cwd=path)
-        run("git", "checkout", "--detach", pin["commit"], cwd=path)
-        if subprocess.run(["git","diff","--quiet"], cwd=path).returncode: raise SystemExit(f"dirty checkout: {path}")
+        if not path.exists():
+            run("git", "clone", "--filter=blob:none", pin["url"], path)
+            run("git", "fetch", "origin", pin["commit"], cwd=path)
+            run("git", "checkout", "--detach", pin["commit"], cwd=path)
+        head=subprocess.check_output(["git","rev-parse","HEAD"],cwd=path,text=True).strip()
+        if head != pin["commit"]: raise SystemExit(f"pin mismatch: {path}")
+        if key != "cv32e40p-dv-review" and subprocess.run(["git","diff","--quiet"], cwd=path).returncode:
+            raise SystemExit(f"tracked source modified: {path}")
     dv = ws / "dv"
     for link, target in ((dv/"core-v-cores/cv32e40p", ws/"core"), (dv/"vendor_lib/openhwgroup_core-v-verif", ws/"core-v-verif"), (dv/"vendor_lib/riscv-arch-test/act4", ws/"act4")):
         link.parent.mkdir(parents=True, exist_ok=True)
-        if not link.exists(): link.symlink_to(target)
+        relative=Path(os.path.relpath(target,link.parent))
+        if link.is_symlink() and link.readlink()!=relative: link.unlink()
+        if not link.exists(): link.symlink_to(relative)
     # Small integration needed by this testbench revision: expose debug_req and
     # the non-PULP core parameter. Checked replacements fail closed on drift.
     replacements = {
@@ -53,6 +60,15 @@ def main():
         path.write_text(text)
     if a.generate:
         run("make", "CONFIG_FILES=config/cores/cve4/cv32e40p-v2-rv32imc/test_config.yaml", cwd=ws/"act4")
-    if a.build: run("make", "verilate", "CV_CORE_CONFIG=rv32imc", "TEST=certification_rv32imc", cwd=dv/"sim/core")
+    if a.build:
+        run("make", "verilate", "CV_CORE_CONFIG=rv32imc", "TEST=certification_rv32imc", cwd=dv/"sim/core")
+        sim=dv/"sim/core/simulation_results/certification_rv32imc/verilator_executable"
+        diff=subprocess.check_output(["git","diff","--binary","HEAD","--"],cwd=dv)
+        provenance={"schema_version":1,"pins":{k:PINS[k]["commit"] for k in names},
+                    "integration_diff_sha256":hashlib.sha256(diff).hexdigest(),
+                    "simulator_sha256":sha(sim),"platform":platform.platform(),
+                    "verilator":subprocess.check_output([shutil.which("verilator") or "verilator","--version"],text=True).strip(),
+                    "built_at_utc":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime())}
+        (ws/"build-provenance.json").write_text(json.dumps(provenance,indent=2)+"\n")
     print(ws)
 if __name__ == "__main__": main()

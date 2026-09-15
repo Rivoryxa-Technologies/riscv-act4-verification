@@ -1,6 +1,8 @@
 {
-  "riscv-arch-test": {"url": "https://github.com/riscv/riscv-arch-test.git", "commit": "ea91e744290bca14532cf99f71875af2ae479b15", "license": "BSD-3-Clause and Apache-2.0"},
-  "cv32e40p-dv-review": {"url": "https://github.com/openhwgroup/cv32e40p-dv-review.git", "commit": "89ad543d8709f6dae55c9a91cd2d14f4b25ac348", "license": "Apache-2.0 WITH SHL-2.1"},
-  "cv32e40p": {"url": "https://github.com/openhwgroup/cv32e40p.git", "commit": "6033d2b1be3295ec774d17ac4cf226faacfdeb08", "license": "Apache-2.0"},
-  "core-v-verif": {"url": "https://github.com/openhwgroup/core-v-verif.git", "commit": "f3b1f971e0e6b94deae46d279cc50ca390785369", "license": "Apache-2.0 WITH SHL-2.1"}
+  "riscv-arch-test": {"url": "https://github.com/riscv/riscv-arch-test.git", "commit": "ea91e744290bca14532cf99f71875af2ae479b15", "license_files": ["COPYING.BSD", "COPYING.APACHE", "COPYING.CC"]},
+  "cv32e40p-dv-review": {"url": "https://github.com/openhwgroup/cv32e40p-dv-review.git", "commit": "89ad543d8709f6dae55c9a91cd2d14f4b25ac348", "license_files": ["LICENSE"]},
+  "cv32e40p": {"url": "https://github.com/openhwgroup/cv32e40p.git", "commit": "6033d2b1be3295ec774d17ac4cf226faacfdeb08", "license_files": ["LICENSE"]},
+  "core-v-verif": {"url": "https://github.com/openhwgroup/core-v-verif.git", "commit": "f3b1f971e0e6b94deae46d279cc50ca390785369", "license_files": ["LICENSE.md"]},
+  "integration_diff_sha256": "38cefebb59f8b89c43ac037da03102ae71562379297b82163005d5b1888a2a25",
+  "act4_build_image": "ghcr.io/riscv/act4-build@sha256:117d9d4ed85cf6f564d21d1ee030546416d4737c024f6a1608c53a1bd9c71ca0"
 }
