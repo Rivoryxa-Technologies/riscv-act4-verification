@@ -1,0 +1,6 @@
+{
+  "riscv-arch-test": {"url": "https://github.com/riscv/riscv-arch-test.git", "commit": "ea91e744290bca14532cf99f71875af2ae479b15", "license": "BSD-3-Clause and Apache-2.0"},
+  "cv32e40p-dv-review": {"url": "https://github.com/openhwgroup/cv32e40p-dv-review.git", "commit": "89ad543d8709f6dae55c9a91cd2d14f4b25ac348", "license": "Apache-2.0 WITH SHL-2.1"},
+  "cv32e40p": {"url": "https://github.com/openhwgroup/cv32e40p.git", "commit": "6033d2b1be3295ec774d17ac4cf226faacfdeb08", "license": "Apache-2.0"},
+  "core-v-verif": {"url": "https://github.com/openhwgroup/core-v-verif.git", "commit": "f3b1f971e0e6b94deae46d279cc50ca390785369", "license": "Apache-2.0 WITH SHL-2.1"}
+}
