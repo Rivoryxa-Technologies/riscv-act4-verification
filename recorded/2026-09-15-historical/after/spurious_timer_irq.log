@@ -1,0 +1,5 @@
+HISTORICAL_PASS case=spurious_timer_irq
+- /private/tmp/rivoryxa-historical-review-20260915/historical/mm_ram_timer_tb.sv:66: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.050 2026-07-01
+- Verilator: $finish at 86ns; walltime 0.000 s; speed 4.778 ms/s
+- Verilator: cpu 0.000 s on 1 threads; allocated 2 MB

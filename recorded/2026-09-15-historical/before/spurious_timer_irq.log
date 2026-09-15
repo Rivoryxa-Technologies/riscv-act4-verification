@@ -1,0 +1,3 @@
+[86000] %Fatal: mm_ram_timer_tb.sv:64: Assertion failed in mm_ram_timer_tb: SPURIOUS_TIMER_IRQ_FAILED
+%Error: /private/tmp/rivoryxa-historical-review-20260915/historical/mm_ram_timer_tb.sv:64: Verilog $stop
+Aborting...

@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "upstream": "https://github.com/openhwgroup/cv32e40p-dv-review.git",
+  "revisions": {
+    "before": "1726d14796601884d54d9b0f699128800e2dcf55",
+    "after": "001127416802a6f346aff3dde08e91d2b9f86958"
+  },
+  "cases": [
+    {
+      "variant": "before",
+      "case": "smoke",
+      "command": [
+        "/private/tmp/rivoryxa-historical-review-20260915/evidence/historical-bbea96cd5e60/before/obj/Vmm_ram_timer_tb",
+        "+CASE=smoke"
+      ],
+      "exit": 0,
+      "timed_out": false,
+      "seconds": 0.5495053750000007,
+      "accepted": true,
+      "expected_failure": null
+    },
+    {
+      "variant": "before",
+      "case": "carry_without_write",
+      "command": [
+        "/private/tmp/rivoryxa-historical-review-20260915/evidence/historical-bbea96cd5e60/before/obj/Vmm_ram_timer_tb",
+        "+CASE=carry_without_write"
+      ],
+      "exit": 0,
+      "timed_out": false,
+      "seconds": 0.0030592909999995754,
+      "accepted": true,
+      "expected_failure": null
+    },
+    {
+      "variant": "before",
+      "case": "low_write_at_carry",
+      "command": [
+        "/private/tmp/rivoryxa-historical-review-20260915/evidence/historical-bbea96cd5e60/before/obj/Vmm_ram_timer_tb",
+        "+CASE=low_write_at_carry"
+      ],
+      "exit": 1,
+      "timed_out": false,
+      "seconds": 0.0026509999999984046,
+      "accepted": true,
+      "expected_failure": "LOW_WRITE_CARRY_FAILED"
+    },
+    {
+      "variant": "before",
+      "case": "high_write_holds_low",
+      "command": [
+        "/private/tmp/rivoryxa-historical-review-20260915/evidence/historical-bbea96cd5e60/before/obj/Vmm_ram_timer_tb",
+        "+CASE=high_write_holds_low"
+      ],
+      "exit": 1,
+      "timed_out": false,
+      "seconds": 0.002560458999999682,
+      "accepted": true,
+      "expected_failure": "HIGH_WRITE_HOLD_FAILED"
+    },
+    {
+      "variant": "before",
+      "case": "spurious_timer_irq",
+      "command": [
+        "/private/tmp/rivoryxa-historical-review-20260915/evidence/historical-bbea96cd5e60/before/obj/Vmm_ram_timer_tb",
+        "+CASE=spurious_timer_irq"
+      ],
+      "exit": 1,
+      "timed_out": false,
+      "seconds": 0.002489540999999207,
+      "accepted": true,
+      "expected_failure": "SPURIOUS_TIMER_IRQ_FAILED"
+    },
+    {
+      "variant": "after",
+      "case": "smoke",
+      "command": [
+        "/private/tmp/rivoryxa-historical-review-20260915/evidence/historical-bbea96cd5e60/after/obj/Vmm_ram_timer_tb",
+        "+CASE=smoke"
+      ],
+      "exit": 0,
+      "timed_out": false,
+      "seconds": 0.46723129199999924,
+      "accepted": true,
+      "expected_failure": null
+    },
+    {
+      "variant": "after",
+      "case": "carry_without_write",
+      "command": [
+        "/private/tmp/rivoryxa-historical-review-20260915/evidence/historical-bbea96cd5e60/after/obj/Vmm_ram_timer_tb",
+        "+CASE=carry_without_write"
+      ],
+      "exit": 0,
+      "timed_out": false,
+      "seconds": 0.0031274999999997277,
+      "accepted": true,
+      "expected_failure": null
+    },
+    {
+      "variant": "after",
+      "case": "low_write_at_carry",
+      "command": [
+        "/private/tmp/rivoryxa-historical-review-20260915/evidence/historical-bbea96cd5e60/after/obj/Vmm_ram_timer_tb",
+        "+CASE=low_write_at_carry"
+      ],
+      "exit": 0,
+      "timed_out": false,
+      "seconds": 0.0030199580000012105,
+      "accepted": true,
+      "expected_failure": null
+    },
+    {
+      "variant": "after",
+      "case": "high_write_holds_low",
+      "command": [
+        "/private/tmp/rivoryxa-historical-review-20260915/evidence/historical-bbea96cd5e60/after/obj/Vmm_ram_timer_tb",
+        "+CASE=high_write_holds_low"
+      ],
+      "exit": 0,
+      "timed_out": false,
+      "seconds": 0.0028292910000011773,
+      "accepted": true,
+      "expected_failure": null
+    },
+    {
+      "variant": "after",
+      "case": "spurious_timer_irq",
+      "command": [
+        "/private/tmp/rivoryxa-historical-review-20260915/evidence/historical-bbea96cd5e60/after/obj/Vmm_ram_timer_tb",
+        "+CASE=spurious_timer_irq"
+      ],
+      "exit": 0,
+      "timed_out": false,
+      "seconds": 0.002794749999999624,
+      "accepted": true,
+      "expected_failure": null
+    }
+  ],
+  "builds": [
+    {
+      "variant": "before",
+      "revision": "1726d14796601884d54d9b0f699128800e2dcf55",
+      "source_sha256": {
+        "tb/core/mm_ram.sv": "254393082500bb7087b3f791c0910229faa778ba2bd3286fe1cd7cd222087daa",
+        "tb/core/dp_ram.sv": "e916dc3bf93ad76c15f204de82606076a2998170e2f7d0042594268188f2bc3a",
+        "tb/core/tb_riscv/riscv_rvalid_stall.sv": "deeaeffc7272fba561442b3fdb34a1e89c5049c0417d2c15fa0e46785c81d679",
+        "tb/core/tb_riscv/riscv_gnt_stall.sv": "0bffc3a8d8b402481f5c17c7dcc17bd49e560aa44dd3c0b1c3c8b4110c2acc9e"
+      },
+      "command": [
+        "verilator",
+        "--binary",
+        "--timing",
+        "-Wno-fatal",
+        "--top-module",
+        "mm_ram_timer_tb",
+        "--Mdir",
+        "/private/tmp/rivoryxa-historical-review-20260915/evidence/historical-bbea96cd5e60/before/obj",
+        "/private/tmp/rivoryxa-historical-review-20260915/evidence/historical-bbea96cd5e60/before/mm_ram.sv",
+        "/private/tmp/rivoryxa-historical-review-20260915/evidence/historical-bbea96cd5e60/before/dp_ram.sv",
+        "/private/tmp/rivoryxa-historical-review-20260915/evidence/historical-bbea96cd5e60/before/riscv_rvalid_stall.sv",
+        "/private/tmp/rivoryxa-historical-review-20260915/evidence/historical-bbea96cd5e60/before/riscv_gnt_stall.sv",
+        "/private/tmp/rivoryxa-historical-review-20260915/historical/mm_ram_timer_tb.sv"
+      ],
+      "exit": 0,
+      "timed_out": false,
+      "seconds": 4.601397416999999,
+      "simulator_sha256": "af1e717dbc9517180629ef7241896af0b1cf09e2a5bf26acf9398d5cc979b3ae"
+    },
+    {
+      "variant": "after",
+      "revision": "001127416802a6f346aff3dde08e91d2b9f86958",
+      "source_sha256": {
+        "tb/core/mm_ram.sv": "cd6a2dc85a3d23da5aa16cf444758485e8084d7e41def095dd0698ba9a4e81bc",
+        "tb/core/dp_ram.sv": "e916dc3bf93ad76c15f204de82606076a2998170e2f7d0042594268188f2bc3a",
+        "tb/core/tb_riscv/riscv_rvalid_stall.sv": "deeaeffc7272fba561442b3fdb34a1e89c5049c0417d2c15fa0e46785c81d679",
+        "tb/core/tb_riscv/riscv_gnt_stall.sv": "0bffc3a8d8b402481f5c17c7dcc17bd49e560aa44dd3c0b1c3c8b4110c2acc9e"
+      },
+      "command": [
+        "verilator",
+        "--binary",
+        "--timing",
+        "-Wno-fatal",
+        "--top-module",
+        "mm_ram_timer_tb",
+        "--Mdir",
+        "/private/tmp/rivoryxa-historical-review-20260915/evidence/historical-bbea96cd5e60/after/obj",
+        "/private/tmp/rivoryxa-historical-review-20260915/evidence/historical-bbea96cd5e60/after/mm_ram.sv",
+        "/private/tmp/rivoryxa-historical-review-20260915/evidence/historical-bbea96cd5e60/after/dp_ram.sv",
+        "/private/tmp/rivoryxa-historical-review-20260915/evidence/historical-bbea96cd5e60/after/riscv_rvalid_stall.sv",
+        "/private/tmp/rivoryxa-historical-review-20260915/evidence/historical-bbea96cd5e60/after/riscv_gnt_stall.sv",
+        "/private/tmp/rivoryxa-historical-review-20260915/historical/mm_ram_timer_tb.sv"
+      ],
+      "exit": 0,
+      "timed_out": false,
+      "seconds": 4.566111290999999,
+      "simulator_sha256": "4e8343e666cba25b7fd738574c763a22949fe414ad80d153a86d620591dd6f31"
+    }
+  ],
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "python": "3.9.6",
+  "bench_sha256": "02c2ba2ee8432c38c647f3f2ffdef0ebbf1c4bdc17a74a29ccef110f033f8da0",
+  "runner_sha256": "e975948d8cc595978b1b0a4d547b2901d889d719bdeb062a4a072fda66bab76b",
+  "verilator": "Verilator 5.050 2026-07-01 rev vUNKNOWN-built20260701",
+  "ok": true
+}
