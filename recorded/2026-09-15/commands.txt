@@ -1,0 +1,5 @@
+# Canonical clean reproduction command (executed from repository root)
+./reproduce.sh
+
+# Immutable ACT4 generation image used by reproduce.sh and this recorded run
+ghcr.io/riscv/act4-build@sha256:117d9d4ed85cf6f564d21d1ee030546416d4737c024f6a1608c53a1bd9c71ca0

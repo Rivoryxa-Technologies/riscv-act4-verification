@@ -1,0 +1,7 @@
+
+RVCP-SUMMARY: TEST PASSED - Test File "I-bgeu-00.S"
+
+[tb_top] @ t=59840ns: ALL TESTS PASSED
+- /repo/workspace/dv/tb/core/tb_top.sv:215: Verilog $finish
+
+[tb_top] @ t=59845ns: simulation ending...

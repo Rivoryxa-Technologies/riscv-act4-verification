@@ -1,0 +1,174 @@
+
+real	0m2.827s
+user	0m0.106s
+sys	0m0.935s
+
+✓ Generated covergroups for 87 extension(s)
+
+✓ Generated 177 test suite(s)
+Don't run Bundler as root. Installing your bundle as root will break this
+application for all non-root users on this machine.
+Bundler 2.6.9 is running, but your lockfile was generated with 4.0.17. Installing Bundler 4.0.17 and restarting using that version.
+Fetching gem metadata from https://rubygems.org/.
+Fetching bundler 4.0.17
+Installing bundler 4.0.17
+Don't run Bundler as root. Installing your bundle as root will break this
+application for all non-root users on this machine.
+Fetching gem metadata from https://rubygems.org/..........
+Fetching rake 13.4.2
+Installing rake 13.4.2
+Fetching Ascii85 2.0.1
+Fetching base64 0.3.0
+Fetching bigdecimal 4.1.2
+Fetching concurrent-ruby 1.3.8
+Fetching connection_pool 3.0.2
+Fetching drb 2.2.3
+Fetching i18n 1.15.2
+Fetching json 2.21.2
+Fetching logger 1.7.0
+Installing bigdecimal 4.1.2 with native extensions
+Fetching prism 1.9.0
+Fetching minitest 6.0.6
+Fetching securerandom 0.4.1
+Fetching tzinfo 2.0.6
+Installing json 2.21.2 with native extensions
+Fetching uri 1.1.1
+Installing prism 1.9.0 with native extensions
+Fetching activesupport 8.1.3.1
+Fetching public_suffix 7.0.5
+Fetching addressable 2.9.0
+Fetching afm 1.0.0
+Fetching asciidoctor 2.0.26
+Fetching asciidoctor-diagram 3.2.1
+Fetching matrix 0.4.3
+Fetching pdf-core 0.9.0
+Fetching ttfunk 1.7.0
+Fetching prawn 2.4.0
+Fetching prawn-icon 3.0.0
+Fetching css_parser 1.22.0
+Fetching prawn-svg 0.34.2
+Fetching prawn-table 0.2.2
+Fetching hashery 2.1.2
+Fetching ruby-rc4 0.1.5
+Fetching pdf-reader 2.15.1
+Fetching prawn-templates 0.1.2
+Fetching polyglot 0.3.5
+Fetching treetop 1.6.12
+Fetching asciidoctor-pdf 2.3.24
+Fetching awesome_print 1.9.2
+Fetching highline 3.0.1
+Fetching commander 5.0.0
+Fetching ffi 1.17.4 (aarch64-linux-gnu)
+Fetching hana 1.3.7
+Fetching prettyprint 0.2.0
+Fetching pp 0.6.4
+Fetching sorbet-runtime 0.6.13393
+Fetching strings-ansi 0.2.0
+Fetching tty-cursor 0.7.1
+Fetching tty-screen 0.8.2
+Fetching unicode-display_width 2.6.0
+Fetching tty-progressbar 0.18.3
+Fetching idlc 0.1.6
+Fetching regexp_parser 2.12.0
+Fetching simpleidn 0.2.3
+Fetching json_schemer 2.5.0
+Fetching nkf 0.3.0
+Fetching numbers_and_words 1.0.3
+Fetching ostruct 0.6.3
+Fetching tty-color 0.6.0
+Installing nkf 0.3.0 with native extensions
+Fetching pastel 0.8.0
+Fetching rubyzip 3.4.1
+Fetching unicode_utils 1.4.0
+Fetching strings 0.2.1
+Fetching terminal-table 4.0.0
+Fetching thor 1.5.0
+Fetching tilt 2.8.0
+Fetching tty-command 0.10.1
+Fetching tty-exit 0.1.0
+Fetching tty-logger 0.6.0
+Fetching tty-option 0.3.0
+Fetching tty-table 0.12.0
+Fetching udb_helpers 0.1.3
+Fetching z3 0.0.20260727
+Fetching udb 0.1.15
+Fetching write_xlsx 1.15.0
+Fetching udb-gen 0.1.14
+Installing Ascii85 2.0.1
+Installing base64 0.3.0
+Installing concurrent-ruby 1.3.8
+Installing connection_pool 3.0.2
+Installing drb 2.2.3
+Installing i18n 1.15.2
+Installing logger 1.7.0
+Installing minitest 6.0.6
+Installing securerandom 0.4.1
+Installing tzinfo 2.0.6
+Installing uri 1.1.1
+Installing activesupport 8.1.3.1
+Installing public_suffix 7.0.5
+Installing addressable 2.9.0
+Installing afm 1.0.0
+Installing asciidoctor-diagram 3.2.1
+Installing asciidoctor 2.0.26
+Installing matrix 0.4.3
+Installing pdf-core 0.9.0
+Installing ttfunk 1.7.0
+Installing prawn 2.4.0
+Installing css_parser 1.22.0
+Installing prawn-icon 3.0.0
+Installing prawn-svg 0.34.2
+Installing prawn-table 0.2.2
+Installing hashery 2.1.2
+Installing ruby-rc4 0.1.5
+Installing polyglot 0.3.5
+Installing prawn-templates 0.1.2
+Installing pdf-reader 2.15.1
+Installing treetop 1.6.12
+Installing awesome_print 1.9.2
+Installing commander 5.0.0
+Installing highline 3.0.1
+Installing hana 1.3.7
+Installing prettyprint 0.2.0
+Installing asciidoctor-pdf 2.3.24
+Installing pp 0.6.4
+Installing ffi 1.17.4 (aarch64-linux-gnu)
+Installing sorbet-runtime 0.6.13393
+Installing strings-ansi 0.2.0
+Installing tty-cursor 0.7.1
+Installing tty-screen 0.8.2
+Installing unicode-display_width 2.6.0
+Installing tty-progressbar 0.18.3
+Installing idlc 0.1.6
+Installing regexp_parser 2.12.0
+Installing simpleidn 0.2.3
+Installing json_schemer 2.5.0
+Installing numbers_and_words 1.0.3
+Installing ostruct 0.6.3
+Installing tty-color 0.6.0
+Installing pastel 0.8.0
+Installing rubyzip 3.4.1
+Installing strings 0.2.1
+Installing unicode_utils 1.4.0
+Installing terminal-table 4.0.0
+Installing thor 1.5.0
+Installing tilt 2.8.0
+Installing tty-command 0.10.1
+Installing tty-exit 0.1.0
+Installing tty-logger 0.6.0
+Installing tty-option 0.3.0
+Installing tty-table 0.12.0
+Installing udb_helpers 0.1.3
+Installing z3 0.0.20260727
+Installing write_xlsx 1.15.0
+Installing udb-gen 0.1.14
+Installing udb 0.1.15 with native extensions
+Bundle complete! 4 Gemfile dependencies, 75 gems now installed.
+Use `bundle info [gemname]` to see where a bundled gem is installed.
+UDB gem missing or out of date; running 'bundle install'...
+✓ DUT configs prepared: 1 config in 68.1s
+✓ Build complete: 470 succeeded
+
+real	6m22.587s
+user	4m27.460s
+sys	1m2.684s

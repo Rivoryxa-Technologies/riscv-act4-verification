@@ -1,0 +1,7 @@
+
+RVCP-SUMMARY: TEST PASSED - Test File "ExceptionsZc-00.S"
+
+[tb_top] @ t=28700ns: ALL TESTS PASSED
+- /repo/workspace/dv/tb/core/tb_top.sv:215: Verilog $finish
+
+[tb_top] @ t=28705ns: simulation ending...

@@ -1,0 +1,7 @@
+
+RVCP-SUMMARY: TEST PASSED - Test File "MisalignZca-c.lwsp-00.S"
+
+[tb_top] @ t=12830ns: ALL TESTS PASSED
+- /repo/workspace/dv/tb/core/tb_top.sv:215: Verilog $finish
+
+[tb_top] @ t=12835ns: simulation ending...

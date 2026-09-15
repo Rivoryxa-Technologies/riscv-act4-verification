@@ -1,0 +1,7 @@
+
+RVCP-SUMMARY: TEST PASSED - Test File "Zicsr-csrrw-00.S"
+
+[tb_top] @ t=40880ns: ALL TESTS PASSED
+- /repo/workspace/dv/tb/core/tb_top.sv:215: Verilog $finish
+
+[tb_top] @ t=40885ns: simulation ending...

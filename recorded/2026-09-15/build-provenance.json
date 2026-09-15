@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "pins": {
+    "riscv-arch-test": "ea91e744290bca14532cf99f71875af2ae479b15",
+    "cv32e40p-dv-review": "89ad543d8709f6dae55c9a91cd2d14f4b25ac348",
+    "cv32e40p": "6033d2b1be3295ec774d17ac4cf226faacfdeb08",
+    "core-v-verif": "f3b1f971e0e6b94deae46d279cc50ca390785369"
+  },
+  "integration_diff_sha256": "38cefebb59f8b89c43ac037da03102ae71562379297b82163005d5b1888a2a25",
+  "simulator_sha256": "0b821c96abebcb30285b5f725ec7ad523f733cfafd5531cc9b4e14353c853e01",
+  "platform": "Linux-6.8.0-100-generic-aarch64-with-glibc2.39",
+  "verilator": "Verilator 5.020 2024-01-01 rev (Debian 5.020-1)",
+  "built_at_utc": "2026-09-15T06:16:23Z"
+}

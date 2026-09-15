@@ -1,0 +1,7 @@
+
+RVCP-SUMMARY: TEST PASSED - Test File "I-ori-00.S"
+
+[tb_top] @ t=43240ns: ALL TESTS PASSED
+- /repo/workspace/dv/tb/core/tb_top.sv:215: Verilog $finish
+
+[tb_top] @ t=43245ns: simulation ending...

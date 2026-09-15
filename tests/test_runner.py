@@ -26,7 +26,7 @@ class Tests(unittest.TestCase):
         self.assertFalse(run.manifest_matches(names[:-1]+[names[0]]))
         self.assertFalse(run.manifest_matches(names+["extra.elf"]))
     def test_timeout_kills_simulation(self):
-        code,text,timed=run.run_sim([sys.executable,"-c","import time; print('started',flush=True); time.sleep(2)"],ROOT,0.05)
+        code,text,timed=run.run_sim([sys.executable,"-c","import time; print('started',flush=True); time.sleep(2)"],ROOT,0.5)
         self.assertNotEqual(code,0); self.assertTrue(timed); self.assertIn("started",text); self.assertIn("TIMEOUT",text)
     def test_source_diff_hash_rejects_wrong_source(self):
         pins={"integration_diff_sha256":run.hashlib.sha256(b"allowed").hexdigest()}

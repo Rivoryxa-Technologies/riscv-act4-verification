@@ -13,20 +13,15 @@ general RISC-V compliance or certification.
 
 ## Reproduce
 
-Prerequisites are Git, Python 3.10+, Make, `uv`, Ruby/Bundler, a compatible
-RISC-V GCC toolchain, Sail RISC-V 0.13.1, Verilator, and a C++ compiler. The
-upstream ACT4 README documents these dependencies. The pinned Linux ARM64 ACT4
-build image contains GCC 16.1.0 and Sail 0.13.1. `setup.py` invokes no package
+Host prerequisites are Git, Python 3.10+, Make, Docker, Verilator, a C++
+compiler, and `riscv64-unknown-elf-objcopy`. The upstream ACT4 README documents
+the generation dependencies. The pinned Linux ARM64 ACT4 build image supplies
+GCC 16.1.0, Sail 0.13.1, `uv`, and Ruby/Bundler. `setup.py` invokes no package
 installer and does not use unpinned source branches.
 
 ```sh
-REPO=/absolute/path/to/riscv-act4-verification
-python3 "$REPO/setup.py" "$REPO/workspace"
-docker run --rm --user "$(id -u):$(id -g)" -e HOME=/home/shared -v "$REPO:/repo" \
-  ghcr.io/riscv/act4-build@sha256:117d9d4ed85cf6f564d21d1ee030546416d4737c024f6a1608c53a1bd9c71ca0 \
-  sh -lc 'cd /repo/workspace/act4 && mise trust .mise.toml && mise install && mise exec -- make clean && mise exec -- make CONFIG_FILES=config/cores/cve4/cv32e40p-v2-rv32imc/test_config.yaml'
-python3 "$REPO/setup.py" "$REPO/workspace" --build
-python3 "$REPO/run.py" "$REPO/workspace"
+git clone https://github.com/Rivoryxa-Technologies/riscv-act4-verification.git
+./riscv-act4-verification/reproduce.sh
 ```
 
 Both commands work from any current directory. Generation produces expected
