@@ -1,0 +1,3 @@
+[106000] %Fatal: mm_ram_timer_tb.sv:48: Assertion failed in mm_ram_timer_tb.read_timer: BUS_HIGH_HOLD_FAILED expected=00000067 actual=00000068
+%Error: /private/tmp/rivoryxa-historical-final-20260915/historical/mm_ram_timer_tb.sv:48: Verilog $stop
+Aborting...

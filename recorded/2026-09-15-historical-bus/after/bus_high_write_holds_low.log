@@ -1,0 +1,7 @@
+BUS_READ addr=0200bff8 expected=00000067 actual=00000067
+BUS_READ addr=0200bffc expected=12345678 actual=12345678
+HISTORICAL_PASS case=bus_high_write_holds_low
+- /private/tmp/rivoryxa-historical-final-20260915/historical/mm_ram_timer_tb.sv:96: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.050 2026-07-01
+- Verilator: $finish at 160ns; walltime 0.000 s; speed 6.667 ms/s
+- Verilator: cpu 0.000 s on 1 threads; allocated 2 MB
