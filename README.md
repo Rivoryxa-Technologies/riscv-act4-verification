@@ -57,3 +57,16 @@ runs clean generation, RTL build, all 94 simulations, and uploads evidence.
 ## Historical bug reproduction
 
 A separate [timer write/carry regression](historical/README.md) executes unchanged upstream RTL before and after an upstream-authored fix. Two ordinary cases pass on both revisions; five targeted cases reproduce the old timer-state and spurious-interrupt failures and pass after the fix. This is verification-platform RTL, not a newly discovered core bug or our authorship of the upstream fix. Run `python3 historical/run.py`; Docker and ACT generation are not required for this focused check.
+
+---
+
+## More from Rivoryxa
+
+This repository is one public example. The method it demonstrates is applied to
+real OpenHW CORE-V issues in
+[core-v-investigation-reports](https://github.com/Rivoryxa-Technologies/core-v-investigation-reports):
+sixteen public GitHub issues taken to a disposition, each with its evidence,
+proof scope and limits written down.
+
+All examples are listed on the
+[Rivoryxa Technologies profile](https://github.com/Rivoryxa-Technologies).
